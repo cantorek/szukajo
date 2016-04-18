@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tajemniczy gość z nibylandii">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/static/mirko.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row">
+		<h2 class="text-center">Mirko szukajka</h2>
+           <div id="custom-search-input">
+                            <div class="input-group col-xs-12">
+                                <form action="/" method="GET" class="form-inline" role="form">
+                                    <div class="form-group col-sm-11">
+                                    <input type="text" name="q" class="search-query form-control" placeholder="szukaj mnie..." />
+                                    </div>
+                                        <button class="btn btn-success" type="submit" text="Szukaj!">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+            jak szukać? <br />
+            obojetnie jaki text - szukaj tekstu
+            author:wykop - szukaj po autorze, 
+            plus:>100 - więcej niż 100 plusów, 
+            tags:debata - tag debata, 
+            timestamp:>2016 - z roku 2016 lub nowsze,
+        </div>
+    </div>
+
+<hgroup class="mb20">
+<h1>Znaleziono</h1>
+<h2 class="lead"><strong class="text-danger">{{ res.total }} </strong> wpisów na mirko dla <strong class="text-danger">{{ q }}</strong></h2>
+</hgroup>
+
+<section class="col-xs-12 col-sm-6 col-md-12">
+{% for wpis in r %}
+
+	<article class="search-result row">
+		<div class="col-xs-12 col-sm-12 col-md-2">
+			<ul class="meta-search">
+                <li><i class="glyphicon glyphicon-user"></i> <span>{{ wpis.author }}</span></li>
+                <li><i class="glyphicon glyphicon-calendar"></i> <span>{{ wpis.timestamp|slice:"10" }}</span></li>
+                <li><i class="glyphicon glyphicon-time"></i> <span>{{ wpis.timestamp|slice:"11:"|slice:"8" }}</span></li>
+                {% if wpis.tags %}
+                    <i class="glyphicon glyphicon-tags"></i> 
+                {% endif %}
+                {% for tag in wpis.tags %}
+                    <span> #{{ tag }} </span>
+                {% endfor %}
+                <li><i class="glyphicon glyphicon-plus"></i>{{ wpis.plus }}</li>
+			</ul>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-9">
+            <div><b>{{ wpis.text }}</b></div>
+            {% if wpis.media %}
+                <img class="thumbnail" src="{{ wpis.media }}" alt="lololo"/>
+            {% endif %}
+            <hr>
+            {% for c in wpis.comments %}
+                <div>
+                    <i>
+                    {{ c.author }}<br />
+                    {{ c.text }} <br />
+                    </i>
+                </div>
+            {% endfor %}
+    		</div>
+    		<span class="clearfix borda"></span>
+            <hr>
+	</article>
+
+{% endfor %}
+</section>
+
+</div>
+
+</body>
+
+</html>
