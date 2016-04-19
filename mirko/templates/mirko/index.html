@@ -57,7 +57,7 @@
 <h1>Znaleziono</h1>
 <h2 class="lead">
     <strong class="text-danger">{{ res.total }} </strong> wpisów na mirko dla <strong class="text-danger">{{ q }}</strong>
-    <p class="small">pokazuję <strong class="text-danger">{{ size }}</strong> wpisów.</p>
+    <p class="small">pokazuję pierwsze <strong class="text-danger">{{ size }}</strong> wpisów.</p>
     <p class="small">Strona <strong class="text-danger"> {{ page }} </strong></p>
 </h2>
 {% if page > 1 %}
@@ -93,10 +93,9 @@
             <hr>
             {% for c in wpis.comments %}
                 <div>
-                    <i>
-                    {{ c.author }}<br />
-                    {{ c.text }} <br />
-                    </i>
+                    <b>{{ c.author }}</b><br />
+                    <i>{{ c.text }}</i><br />
+                    <hr/>
                 </div>
             {% endfor %}
     		</div>
