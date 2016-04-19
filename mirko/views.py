@@ -14,7 +14,7 @@ def parse_query(query = None):
     if query is None:
         return None
 
-    q = re.sub(r'[^A-Za-z0-9_|&:\ ><@#]+', r'', query)
+    q = re.sub(r'[^A-Za-z0-9_|&:\ ><@#-]+', r'', query)
     q = re.sub(r'@', r'author:', q)
     q = re.sub(r'#', r'tags:', q)
 
