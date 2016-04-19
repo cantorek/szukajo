@@ -1,4 +1,4 @@
-body { font-family: 'Lato', sans-serif; }
+html * { font-family: 'Lato', sans-serif; }
 
 #custom-search-input {
         margin:0;
@@ -43,8 +43,8 @@ body { font-family: 'Lato', sans-serif; }
 .mb20 { margin-bottom: 20px; } 
 
 hgroup { padding-left: 15px; border-bottom: 1px solid #ccc; }
-hgroup h1 { font: 500 normal 1.625em; color: #2a3644; margin-top: 0; line-height: 1.15; }
-hgroup h2.lead { font: normal normal 1.125em; color: #2a3644; margin: 0; padding-bottom: 10px; }
+hgroup h1 { font: 400 normal; color: #2a3644; margin-top: 0; line-height: 1.15; }
+hgroup h2.lead { font: normal; color: #2a3644; margin: 0; padding-bottom: 10px; }
 
 
 .search-result .thumbnail { border-radius: 0 !important; }
@@ -55,9 +55,9 @@ hgroup h2.lead { font: normal normal 1.125em; color: #2a3644; margin: 0; padding
 .search-result ul li { font: 400 normal .85em; line-height: 30px; }
 .search-result ul li i { padding-right: 5px; }
 .search-result .col-md-7 { position: relative; }
-.search-result h3 { font: 500 normal 1.375em ; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 { font: 400 normal; margin-top: 0 !important; margin-bottom: 10px !important; }
 .search-result h3 > a, .search-result i { color: #248dc1 !important; }
-.search-result p { font: normal normal 1.125em ; } 
+.search-result p { font: normal; } 
 .search-result span.plus { position: absolute; right: 0; top: 126px; }
 .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
 .search-result span.plus a:hover { background-color: #414141; }
