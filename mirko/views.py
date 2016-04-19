@@ -22,12 +22,25 @@ def parse_query(query = None):
 
 def index(request):
 
+    page = 1
+    size = 10
+
     if not request.GET.get('q'):
         context = RequestContext(request, { } )
         return render(request, 'mirko/index.html', context)
 
+    if request.GET.get('strona'):
+        page = abs(int(request.GET.get('strona')))
+        if page == 0:
+            page = 1
+
+    if request.GET.get('ile'):
+        size = abs(int(request.GET.get('ile')))
+
     q = parse_query(request.GET.get('q'))
     query = {}
+    query['size'] = size
+    query['from'] = (page - 1) * size #from is reserved keyword in python
     query['query'] = {}
     query['query']['query_string'] = {}
     query['query']['query_string']['query'] = q
@@ -41,12 +54,10 @@ def index(request):
     query['highlight'] = {}
     query['highlight']['fields'] = '_all'
 
-
     es = Elasticsearch()
 
     res = es.search(
             index="mirko2",
-            size=100,
             body=json.dumps(query)
             )
 
@@ -55,5 +66,5 @@ def index(request):
         results.append(i['_source'])
 
 
-    context = RequestContext(request, { 'res' : res['hits'], 'q' : q, 'r' : results } )
+    context = RequestContext(request, { 'res' : res['hits'], 'q' : q, 'r' : results, 'size' : size, 'page' : page } )
     return render(request, 'mirko/index.html', context)
