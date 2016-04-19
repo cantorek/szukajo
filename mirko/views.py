@@ -8,7 +8,17 @@ import re
 
 import json
 
-# Create your views here.
+
+def parse_query(query = None):
+
+    if query is None:
+        return None
+
+    q = re.sub(r'[^A-Za-z0-9_|&:\ ><@#]+', r'', query)
+    q = re.sub(r'@', r'author:', q)
+    q = re.sub(r'#', r'tags:', q)
+
+    return q
 
 def index(request):
 
@@ -16,7 +26,7 @@ def index(request):
         context = RequestContext(request, { } )
         return render(request, 'mirko/index.html', context)
 
-    q = re.sub(r'[^A-Za-z0-9_|&:\ ><]+', r'', request.GET.get('q'))
+    q = parse_query(request.GET.get('q'))
     query = {}
     query['query'] = {}
     query['query']['query_string'] = {}
@@ -39,8 +49,6 @@ def index(request):
             size=100,
             body=json.dumps(query)
             )
-
-    print("Got %d Hits:" % res['hits']['total'])
 
     results = []
     for i in res['hits']['hits']:
