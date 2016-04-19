@@ -67,6 +67,7 @@
                 <li><i class="glyphicon glyphicon-user"></i> <span>{{ wpis.author }}</span></li>
                 <li><i class="glyphicon glyphicon-calendar"></i> <span>{{ wpis.timestamp|slice:"10" }}</span></li>
                 <li><i class="glyphicon glyphicon-time"></i> <span>{{ wpis.timestamp|slice:"11:"|slice:"8" }}</span></li>
+                <li><i class="glyphicon glyphicon-link"></i> <span><a href="{{ wpis.url }}">{{ wpis.url }}</a></span></li>
                 {% if wpis.tags %}
                     <i class="glyphicon glyphicon-tags"></i> 
                 {% endif %}
@@ -99,6 +100,13 @@
 </section>
 
 {% endif %}
+
+<div class="row">
+    <div class="col-xm-12 text-center">
+        Wszelkie prawa do tresci przedstawionych tutaj naleza do ich oryginalnych autorow w serwisie wykop.pl/mikroblog
+    </div>
+</div>
+
 </div>
 
 </body>
