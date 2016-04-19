@@ -12,8 +12,11 @@ import json
 
 def index(request):
 
+    if not request.GET.get('q'):
+        context = RequestContext(request, { } )
+        return render(request, 'mirko/index.html', context)
+
     q = re.sub(r'[^A-Za-z0-9_|&:\ ><]+', r'', request.GET.get('q'))
-    print(q)
     query = {}
     query['query'] = {}
     query['query']['query_string'] = {}

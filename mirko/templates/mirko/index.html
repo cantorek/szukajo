@@ -52,6 +52,7 @@
         </div>
     </div>
 
+{% if r %}
 <hgroup class="mb20">
 <h1>Znaleziono</h1>
 <h2 class="lead"><strong class="text-danger">{{ res.total }} </strong> wpisów na mirko dla <strong class="text-danger">{{ q }}</strong></h2>
@@ -97,6 +98,7 @@
 {% endfor %}
 </section>
 
+{% endif %}
 </div>
 
 </body>
